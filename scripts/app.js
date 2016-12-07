@@ -4,10 +4,9 @@ $(document).on("ready", function(){
     url: "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC",
     dataType: "json",
     success: successCallback,
-    error: errorCallback,
+    error: errorCallback
   });
   function successCallback(responseData) {
-    $('.gif-gallery').text('');
     console.log("success!");
     var imageArray = responseData.data;
     imageArray.forEach(function(object) {
@@ -17,8 +16,13 @@ $(document).on("ready", function(){
   function errorCallback() {
     console.log("error!");
   }
+  //$('.offsetInput').on("submit", loadMore);
+  //function loadMore() {
+  //  $('#offsetValue').attr.offset('25');
+  //}
   $('form').on("submit", searchReq);
   function searchReq(giphyQ) {
+    $('.gif-gallery').text('');
     giphyQ.preventDefault();
     $.ajax ({
       method:"GET",
@@ -26,7 +30,7 @@ $(document).on("ready", function(){
       dataType: "json",
       data:$('form').serialize(),
       success: successCallback,
-      error: errorCallback,
+      error: errorCallback
     });
   };
 });
